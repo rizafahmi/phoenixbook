@@ -77,7 +77,7 @@ As you can see, there is a lot going on. But as soon this finishes, we're good t
 
 Open the browser, type `http://localhost:4000/` in the url bar, and voila!
 
-![phoenix](phoenix.png)
+![phoenix](http://i.imgur.com/3RgZ4Ov.png)
 
 
 #### Phoenix Directory Structure
@@ -377,7 +377,7 @@ Open up `web/templates/page/index.html.eex`, remove all boilerplate code, and re
 
 We iterate through `jobs` variable that we make them available in templates from our controller. Refresh your browser, and you'll see one job available. That's it! Easy right?!
 
-![joblist](joblist.png)
+![joblist](http://i.imgur.com/8n1oez3.png)
 
 ### Conclusion
 

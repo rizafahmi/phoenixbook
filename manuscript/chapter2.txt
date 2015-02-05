@@ -23,7 +23,7 @@ First, let's add a new route for creating a job by opening up `web/router.ex` an
 
 Then open `web/controller/page_controller.ex` and add a new function to handle our `:new` route.
 
-  defmodule PhoenixJobs.PageController do
+    defmodule PhoenixJobs.PageController do
       use Phoenix.Controller
 
       def index(conn, _params) do
@@ -83,7 +83,7 @@ After that, we need to create a template for this new job thingy. Let's create a
 
 If you're pointing your browser to `http://localhost:4000/new`, you'll see something like this.
 
-![screenshot new](new-form.png)
+![screenshot new](http://i.imgur.com/xv2T3Qi.png)
 
 If you fill out the form and click save, the form is working but still doing nothing other than submitting the form. We need to get the data from the form and save it to the database. To do that, first we need a new route to handle post data.
 
@@ -133,7 +133,7 @@ Don't forget to add a button to redirect us from the index page to a new page in
 
 Restart the server, and let's try it! Open `http://localhost:4000` in your browser and click the "Post a new job" button to add a new job. Then fill out the form then click "Save".
 
-![new-index](joblist-2.png)
+![new-index](http://i.imgur.com/QM7roG1.png)
 
 Our new job button appears at the end of the list. Let's change the ordering in the query so the new job option is always on the top of the list.
 
