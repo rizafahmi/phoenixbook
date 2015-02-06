@@ -1,4 +1,4 @@
-# Chapter 1
+# Chapter 1: Phoenix Introduction
 
 *TODO*
 
@@ -17,11 +17,11 @@ For this book, we will focus on how to create a web application using Phoenix, w
 
 Ok, let's get started by installing Phoenix. We will use the most recent version of Phoenix which is version *TODO*, Ecto version *TODO*, Elixir version 1.0.0 or later, and Erlang version 17.
 
-### Installing Elixir
+## Installing Elixir
 
 *TODO*
 
-### Installing Phoenix
+## Installing Phoenix
 
 We need to install Phoenix first before we start to build the project. The installation process is easy. Just run these chains of command in your terminal. 
 
@@ -46,7 +46,7 @@ If you see the help message above, you're good to go!
 As you can see above, Phoenix added three new `mix` tasks for us to make our lives easier. Let's create a new Phoenix project using `mix phoenix.new`.
 
 
-### Create Phoenix Project
+## Create New Phoenix Project
 
 What we need to do to create a new Phoenix project is just use `mix phoenix.new` inside our Phoenix directory that we cloned and compiled before. The command will be something like this.
 
@@ -80,7 +80,7 @@ Open the browser, type `http://localhost:4000/` in the url bar, and voila!
 ![phoenix](http://i.imgur.com/3RgZ4Ov.png)
 
 
-#### Phoenix Directory Structure
+### Phoenix Directory Structure
 
 Phoenix is Model-View-Controller, so we find the Phoenix directories structured in that way.
 
@@ -132,13 +132,13 @@ We need to focus on the `web` directory. Our controllers should be inside the `w
 We will talk about model a.k.a Ecto in the next section.
 
 
-### Introduction To Ecto
+## Introduction To Ecto
 
 *TODO*
 
 Ecto is a domain specific language for writing queries and interacting with databases in the Elixir language. Ecto is written in Elixir as a tool for relational databases.
 
-#### Add Ecto To The Project
+### Add Ecto To The Project
 
 We want to save jobs data to a database using Ecto. So we need to add Ecto to our project. To do that, we open the `mix.exs` file and add Ecto as a dependency inside the `deps` function. Ecto also needs the postgrex library to 'talk' to PostgreSQL database. So we also add postgrex as the dependency.
 
@@ -161,7 +161,7 @@ We also need to update our applications list to include both `ecto` and `postgre
 
 Then run `mix deps.get` in the terminal to get all the dependencies. If everything goes well, it'll be time to setup a repo.
 
-#### Create A Repo
+### Create A Repo
 
 A repo in ecto terms is the definition of a basic interface to a database, in this case PostgreSQL. Open up `web/models/repo.ex` and add this code below. If the directory doesn't exist, just create one. You basicly can use any directory
 as long as it still inside the application module area.
@@ -209,7 +209,7 @@ If there is no error message, then we need to add a database, in this case calle
 Quit the `psql` using `\q` then add a model for us to query for.
 
 
-#### Create A Model
+### Create A Model
 
 Let's make a separate file in `web/phoenix_jobs/jobs.ex`. Type the code below to make a model called **Jobs**.
 
@@ -227,7 +227,7 @@ Let's make a separate file in `web/phoenix_jobs/jobs.ex`. Type the code below to
 If you run `mix help`, you'll see a couple of commands that we can use to migrate things, which is what we'll do now.
 
 
-### Generate Migration Script
+## Generate Migration Script
 
 To generate a migration script, we use the `mix` command available when we first install Ecto. First, we want to able to create a job posting:
 
@@ -276,7 +276,7 @@ That's it! If you open the `phoenix_jobs` database on postgresql, you'll find a 
 One last thing we need from Ecto is to write a query for jobs.
 
 
-#### Create A Query
+### Create A Query
 
 Create a new file called `queries.ex` inside the `web/models` directory. Start writing a query for getting all the jobs available.
 
@@ -295,7 +295,7 @@ We will call this query later from Phoenix's controller.
 
 We're done setting up Ecto. Now let's get back to the Phoenix part and create a jobs listing.
 
-### Jobs Listing
+## Jobs Listing
 
 If we open the file called `router.ex`, we will see the mapping from url/uri to controllers:
 
@@ -379,12 +379,12 @@ We iterate through `jobs` variable that we make them available in templates from
 
 ![joblist](http://i.imgur.com/8n1oez3.png)
 
-### Conclusion
+## Conclusion
 
 Phoenix is a full-featured web framework. When combined with Ecto, it becomes more powerful. In this article, we used Phoenix to display a list of data that we get using Ecto. We also set up Ecto to play nicely with Phoenix, from creating a repo, migrating and inserting data, right up until we query to get some data back.
 
 
-### References
+## References
 * [Phoenix on Github](https://github.com/phoenixframework/phoenix)
 * [Plug on Github](https://github.com/elixir-lang/plug)
 * [Elixir Conf Phoenix Talk](http://confreaks.com/videos/4132-elixirconf2014-rise-of-the-phoenix-building-an-elixir-web-framework)
