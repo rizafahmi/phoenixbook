@@ -15,14 +15,17 @@ defmodule PhoenixJobs.Mixfile do
   # Type `mix help compile.app` for more information
   def application do
     [mod: {PhoenixJobs, []},
-     applications: [:phoenix, :cowboy, :logger]]
+     applications: [:phoenix, :cowboy, :logger, :postgrex, :ecto]]
   end
 
   # Specifies your project dependencies
   #
   # Type `mix help deps` for examples and options
   defp deps do
-    [{:phoenix, github: "phoenixframework/phoenix"},
-     {:cowboy, "~> 1.0"}]
+    [ {:phoenix, github: "phoenixframework/phoenix"},
+      {:postgrex, "0.7.0"},
+      {:ecto, "0.7.2"},
+      {:cowboy, "~> 1.0"}
+    ]
   end
 end
