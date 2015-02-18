@@ -166,34 +166,51 @@ Then run `mix deps.get` in the terminal to get all the dependencies. If everythi
 
 ### Create A Repo
 
-A repo in ecto terms is the definition of a basic interface to a database, in this case PostgreSQL. Open up `web/models/repo.ex` and add this code below. If the directory doesn't exist, just create one. You basicly can use any directory
+A repo in ecto terms is the definition of a basic interface to a database, in this case PostgreSQL. Open up or create `web/models/repo.ex` and add this code below. You basicly can put `repo.ex` in any directory
 as long as it still inside the application module area.
 
     defmodule PhoenixJobs.Repo do
-      use Ecto.Repo, adapter: Ecto.Adapters.Postgres
-        
-        def conf do
-          parse_url "ecto://postgresuser:password@localhost/phoenix_jobs"
-        end
-        
-        def priv do
-          app_dir(:phoenix_jobs, "priv/repo")
-        end
+      use Ecto.Repo,
+        otp_app: :phoenix_jobs
+        adapter: Ecto.Adapters.Postgres
+
     end
-    
-Here we define the PostgreSQL connection with a URL format. All you have to change is `postgresuser`, `password`, and the `phoenix_jobs` database name. We will use migration features so the `priv` function is mandatory. We just need to tell where the migration script will be saved, which is in the `priv/repo` directory as the destination folder.
 
-The next thing we should do is to make sure that our Repo module is started with our application, and that it is supervised. Let's open `lib/elixir_jobs.ex`.
+Then we need database configuration for this repo to connect to database. Open `config/confix.exs` file
+and add the configuration needed.
 
-    defmodule ElixirJobs do
+
+    config :phoenix_jobs, PhoenixJobs.Repo,
+      database: "phoenix_jobs",
+      username: "userdb",
+      password: "supersecretpassword",
+      hostname: "localhost"
+
+
+Here we define the PostgreSQL connection. All you have to change is `userdb`, `supersecretpassword`, and the `phoenix_jobs` database name.
+
+The next thing we should do is to make sure that our Repo module is started with our application, and that it is supervised. Let's open `lib/phoenix_jobs.ex`.
+
+    defmodule PhoenixJobs do
       use Application
-        
-        def start(_type, _args) do
-          import Supervisor.Spec
-            tree = [worker(PhoenixJobs.Repo, [])]
-            opts = [name: PhoenixJobs.Sup, strategy: :one_for_one]
-            Supervisor.start_link(tree, opts)
-        end
+
+      def start(_type, _args) do
+        import Supervisor.Spec, warn: false
+
+        children = [
+          supervisor(PhoenixJobs.Endpoint, []),
+          worker(PhoenixJobs.Repo, [])
+
+        ]
+
+        opts = [strategy: :one_for_one, name: PhoenixJobs.Supervisor]
+        Supervisor.start_link(children, opts)
+      end
+
+      def config_change(changed, _new, removed) do
+        PhoenixJobs.Endpoint.config_change(changed, removed)
+        :ok
+      end
     end
 
 To make sure everything is ok, let's compile the project:
@@ -210,7 +227,6 @@ If there is no error message, then we need to add a database, in this case calle
     template1=# \q
 
 Quit the `psql` using `\q` then add a model for us to query for.
-
 
 ### Create A Model
 
