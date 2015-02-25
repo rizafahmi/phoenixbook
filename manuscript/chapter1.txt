@@ -221,7 +221,7 @@ If there is no error message, then we need to add a database, in this case calle
 
     $> psql -Upostgresuser -W template1
     Password for user postgresuser:
-      
+
     template1=# CREATE DATABASE phoenix_jobs;
     CREATE DATABASE
     template1=# \q
@@ -230,31 +230,44 @@ Quit the `psql` using `\q` then add a model for us to query for.
 
 ### Create A Model
 
-Let's make a separate file in `web/phoenix_jobs/jobs.ex`. Type the code below to make a model called **Jobs**.
+Let's make a separate file in `web/jobs.ex`. Type the code below to make a model called **Jobs**.
 
     defmodule PhoenixJobs.Jobs do
       use Ecto.Model
-        
+
         schema "jobs" do
           field :title, :string
-            field :job_type, :string
-            field :description, :string
-            field :job_status, :string
+          field :job_type, :string
+          field :description, :string
+          field :job_status, :string
         end
     end
 
-If you run `mix help`, you'll see a couple of commands that we can use to migrate things, which is what we'll do now.
+If you run `mix help`, you'll see a couple of commands that we can use to migrate things.
 
+    ...
+    
+    mix ecto.create        # Create the storage for the repo
+    mix ecto.drop          # Drop the storage for the repo
+    mix ecto.gen.migration # Generate a new migration for the repo
+    mix ecto.gen.repo      # Generates a new repository
+    mix ecto.migrate       # Runs migrations up on a repo
+    mix ecto.rollback      # Reverts migrations down on a repo
+
+    ...
+
+Now, let's do migration thingy.
 
 ## Generate Migration Script
 
 To generate a migration script, we use the `mix` command available when we first install Ecto. First, we want to able to create a job posting:
 
-    $> mix ecto.gen.migration PhoenixJobs.Repo create_job
+    $ mix ecto.gen.migration create_job
     * creating priv/repo/migrations
-    * creating priv/repo/migrations/20140815040251_create_job.exs
+    * creating priv/repo/migrations/20150225103015_create_job.exs
 
-Open the file that Ecto generates in `priv/repo/migrations/20140815040251_create_job.exs`. In this file we still have to write manual SQL for creating a table and dropping one. (The file name `20140815040251_create_job.exs` will vary depend on the date we generate the file.)
+
+Open the file that Ecto generates in `priv/repo/migrations/20150225103015_create_job.exs`. In this file we still have to write manual SQL for creating a table and dropping one. (The file name `20150225103015_create_job.exs` will vary depend on the date we generate the file.)
 
     defmodule PhoenixJobs.Repo.Migrations.CreateJob do
       use Ecto.Migration
