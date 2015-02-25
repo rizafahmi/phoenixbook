@@ -283,7 +283,7 @@ Open the file that Ecto generates in `priv/repo/migrations/20150225103015_create
       end
     end
 
-What we did in this script is create a table and insert one dummy file when we run the migrate (`up` function). If we rollback to the previous migration, we will drop the table `jobs`.
+What we did in this script is create a table and also insert one dummy file when we run the migrate (`up` function). If we rollback to the previous migration, we will drop the table `jobs`.
 
 After we done with a migration script, we can run the migration.
 
@@ -292,8 +292,9 @@ After we done with a migration script, we can run the migration.
 
 Running the migration is very easy. Let's do one:
 
-    $> mix ecto.migrate PhoenixJobs.Repo
-    * running UP _build/dev/lib/phoenix_jobs/priv/repo/migrations/20140815040251_create_job.exs
+    $ mix ecto.migrate PhoenixJobs.Repo
+    [info] == Running PhoenixJobs.Repo.Migrations.CreateJob.up/0 forward
+    [info] == Migrated in 0.0s
 
 That's it! If you open the `phoenix_jobs` database on postgresql, you'll find a `jobs` table now. If we run `SELECT * FROM jobs`, the dummy data is there:
 

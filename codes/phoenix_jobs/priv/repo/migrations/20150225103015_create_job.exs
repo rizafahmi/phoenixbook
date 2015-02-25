@@ -2,12 +2,15 @@ defmodule PhoenixJobs.Repo.Migrations.CreateJob do
   use Ecto.Migration
 
   def up do
-    ["CREATE TABLE jobs(id serial primary key, title varchar(125), job_type varchar(50), description text, job_status varchar(50))",
-      "INSERT INTO jobs(title, job_type, description, job_status) VALUES ('Elixir Expert Needed', 'Remote', 'Elixir expert needed for writing article about Elixir every single week or two.', 'Part Time')"
-    ]
+    create table(:jobs) do
+      add :title, :string, size: 75
+      add :job_type, :string, size: 50
+      add :description, :string, size: 250
+      add :job_status, :string, size: 50
+    end
   end
 
   def down do
-    DROP TABLE jobs
+    drop table(:jobs)
   end
 end
