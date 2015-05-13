@@ -23,11 +23,9 @@ Ok, let's get started by installing Phoenix. We will use the most recent version
 
 ## Installing Phoenix
 
-We need to install Phoenix first before we start to build the project. The installation process is easy. Just run these chains of command in your terminal. 
+We need to install Phoenix first before we start to build the project. The installation process is easy. Just fetch Phoenix installer using mix:
 
-    $> git clone https://github.com/phoenixframework/phoenix.git && cd phoenix && mix do deps.get, compile
-
-These commands will get the latest Phoenix from Github, get all dependencies needed for Phoenix, and then compile it.
+    $ mix archive.install https://github.com/phoenixframework/phoenix/releases/download/v0.13.0/phoenix_new-0.13.0.ez
 
 If everything goes well, run this command to check whether Phoenix is installed or not:
 
@@ -36,38 +34,44 @@ If everything goes well, run this command to check whether Phoenix is installed 
 
     ...
     mix phoenix.new       # Creates Phoenix application
-    mix phoenix.routes    # Prints all routes
-    mix phoenix.server    # Starts applications and their servers
     ...
 
 If you see the help message above, you're good to go!
 
-**Heads up: ** *You need to be inside the phoenix directory to run this `mix phoenix --help` command.*
-
-As you can see above, Phoenix added three new `mix` tasks for us to make our lives easier. Let's create a new Phoenix project using `mix phoenix.new`.
+As you can see above, Phoenix added one new `mix` tasks for us to make our lives easier. Let's create a new Phoenix project using `mix phoenix.new`.
 
 
 ## Create New Phoenix Project
 
-What we need to do to create a new Phoenix project is just use `mix phoenix.new` inside our Phoenix directory that we cloned and compiled before. The command will be something like this.
+What we need to do to create a new Phoenix project is just use `mix phoenix.new`. The command will be something like this.
 
-    $> mix phoenix.new project_name /path/to/your/project
+    $ mix phoenix.new /path/to/your/project
 
 We will name our project `phoenix_jobs`. The directory of the project should be outside of this Phoenix cloned directory.
 
-    $> mix phoenix.new phoenix_jobs ../phoenix_jobs
+    $> mix phoenix.new phoenix_jobs
 
-    * creating ../phoenix_jobs
-    * creating ../phoenix_jobs/.gitignore
-    * creating ../phoenix_jobs/README.md
-    * creating ../phoenix_jobs/config
-    * creating ../phoenix_jobs/config/config.exs
-    * creating ../phoenix_jobs/config/dev.exs
-    * creating ../phoenix_jobs/config/locales
-    * creating ../phoenix_jobs/config/locales/en.exs
-    * creating ../phoenix_jobs/config/prod.exs
-    * creating ../phoenix_jobs/config/test.exs
+    * creating phoenix_jobs
+    * creating phoenix_jobs/.gitignore
+    * creating phoenix_jobs/README.md
+    * creating phoenix_jobs/config
+    * creating phoenix_jobs/config/config.exs
+    * creating phoenix_jobs/config/dev.exs
+    * creating phoenix_jobs/config/locales
+    * creating phoenix_jobs/config/locales/en.exs
+    * creating phoenix_jobs/config/prod.exs
+    * creating phoenix_jobs/config/test.exs
     ....
+
+Phoenix generates the directory structure and all the files we need for our project. After the process is done, it will ask us if we want to install it to install our `mix` dependencies for us. Answer wit Yes will be a wise choice.
+
+    Install mix dependencies? [Yn] y
+    * running mix deps.get
+
+Phoenix installer also prompt us to install [brunch.io](http://brunch.io/) as the static asset management. This step is optional by the way and will require [node.js]() and npm installed on your system.
+
+    Install brunch.io dependencies? [Yn] y
+    * running npm install
 
 As you can see, there is a lot going on. But as soon this finishes, we're good to go. What `phoenix.new` did was bootstrap our Phoenix project. Now go to destination directory, get all dependencies, compile it. and try to start the Phoenix project.
 
