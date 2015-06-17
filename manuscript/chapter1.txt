@@ -188,6 +188,9 @@ add a new page we called it `hello`.
       # end
     end
 
+Now let's create a new controller called `HelloController` file so we can start
+saying hello to the visitor.
+
 
 ## Introduction To Ecto
 
