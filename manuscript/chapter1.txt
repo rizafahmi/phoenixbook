@@ -1,12 +1,5 @@
 # Chapter 1: Phoenix Introduction
 
-*TODO*
-
-
-## Elixir Introduction
-
-*NEED THIS PART?*
-
 ## Phoenix Introduction
 
 Phoenix is the Elixir web framework targeting full-featured, fault tolerant applications with realtime functionality. Phoenix focuses on making developers highly productive without sacrificing performance. Phoenix is created by [Chris McCord](https://twitter.com/chris_mccord), available on [github](https://github.com/phoenixframework/phoenix), and has reached version **TODO**
@@ -15,15 +8,12 @@ If you want to know more about Phoenix, I suggest you watch McCord's talk at Eli
 
 For this book, we will focus on how to create a web application using Phoenix, with Ecto as the persistence layer. We will build a simple job board that a user can browse for Elixir jobs and submit Elixir job opportunities.
 
-Ok, let's get started by installing Phoenix. We will use the most recent version of Phoenix which is version *TODO*, Ecto version *TODO*, Elixir version 1.0.0 or later, and Erlang version 17.
+Ok, let's get started by installing Phoenix. We will use the most recent version of Phoenix which is version *TODO*. Let's assume you've already have Elixir version 1.0.0 or later, and Erlang version 17 and PostgreSQL version 8.x or later installed on your system.
 
-## Installing Elixir
-
-*TODO*
 
 ## Installing Phoenix
 
-First, we need to install Phoenix first before we start to build the project. The installation process is quiet easy. Just fetch Phoenix installer using `mix arcihve.install`:
+First, we need to install Phoenix first before we start to build the project. The installation process never been easier. Just the latest fetch Phoenix installer using `mix arcihve.install`. Let's install Phoenix version 0.13.0 for the purpose of this book:
 
     $ mix archive.install https://github.com/phoenixframework/phoenix/releases/download/v0.13.0/phoenix_new-0.13.0.ez
 
