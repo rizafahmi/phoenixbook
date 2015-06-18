@@ -1,5 +1,5 @@
 defmodule PhoenixJobs.PageController do
-  use Phoenix.Controller
+  use PhoenixJobs.Web, :controller
 
   plug :action
 

@@ -1,0 +1,12 @@
+# Chapter 1: Introduction To Phoenix
+
+## 1.1 Installation
+## 1.2 Application Structure
+## 1.3 Views and Templates
+## 1.4 Databases
+
+# Chapter 2: Example App - Job Board
+
+## 2.1 User Authentication
+## 2.2 User Profile
+## 2.3 Job Post

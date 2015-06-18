@@ -1,3 +1,3 @@
 defmodule PhoenixJobs.LayoutView do
-  use PhoenixJobs.View
+  use PhoenixJobs.Web, :view
 end

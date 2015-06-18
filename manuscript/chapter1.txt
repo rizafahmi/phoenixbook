@@ -1,12 +1,5 @@
 # Chapter 1: Phoenix Introduction
 
-*TODO*
-
-
-## Elixir Introduction
-
-*NEED THIS PART?*
-
 ## Phoenix Introduction
 
 Phoenix is the Elixir web framework targeting full-featured, fault tolerant applications with realtime functionality. Phoenix focuses on making developers highly productive without sacrificing performance. Phoenix is created by [Chris McCord](https://twitter.com/chris_mccord), available on [github](https://github.com/phoenixframework/phoenix), and has reached version **TODO**
@@ -15,19 +8,14 @@ If you want to know more about Phoenix, I suggest you watch McCord's talk at Eli
 
 For this book, we will focus on how to create a web application using Phoenix, with Ecto as the persistence layer. We will build a simple job board that a user can browse for Elixir jobs and submit Elixir job opportunities.
 
-Ok, let's get started by installing Phoenix. We will use the most recent version of Phoenix which is version *TODO*, Ecto version *TODO*, Elixir version 1.0.0 or later, and Erlang version 17.
+Ok, let's get started by installing Phoenix. We will use the most recent version of Phoenix which is version *TODO*. Let's assume you've already have Elixir version 1.0.0 or later, and Erlang version 17 and PostgreSQL version 8.x or later installed on your system.
 
-## Installing Elixir
-
-*TODO*
 
 ## Installing Phoenix
 
-We need to install Phoenix first before we start to build the project. The installation process is easy. Just run these chains of command in your terminal. 
+First, we need to install Phoenix first before we start to build the project. The installation process never been easier. Just the latest fetch Phoenix installer using `mix arcihve.install`. Let's install Phoenix version 0.13.0 for the purpose of this book:
 
-    $> git clone https://github.com/phoenixframework/phoenix.git && cd phoenix && mix do deps.get, compile
-
-These commands will get the latest Phoenix from Github, get all dependencies needed for Phoenix, and then compile it.
+    $ mix archive.install https://github.com/phoenixframework/phoenix/releases/download/v0.13.0/phoenix_new-0.13.0.ez
 
 If everything goes well, run this command to check whether Phoenix is installed or not:
 
@@ -36,44 +24,50 @@ If everything goes well, run this command to check whether Phoenix is installed 
 
     ...
     mix phoenix.new       # Creates Phoenix application
-    mix phoenix.routes    # Prints all routes
-    mix phoenix.server    # Starts applications and their servers
     ...
 
 If you see the help message above, you're good to go!
 
-**Heads up: ** *You need to be inside the phoenix directory to run this `mix phoenix --help` command.*
-
-As you can see above, Phoenix added three new `mix` tasks for us to make our lives easier. Let's create a new Phoenix project using `mix phoenix.new`.
+As you can see above, Phoenix added one new `mix` tasks for us to make our lives easier. Let's create a new Phoenix project using `mix phoenix.new`.
 
 
 ## Create New Phoenix Project
 
-What we need to do to create a new Phoenix project is just use `mix phoenix.new` inside our Phoenix directory that we cloned and compiled before. The command will be something like this.
+What we need to do to create a new Phoenix project is just use `mix phoenix.new`. The command will be something like this.
 
-    $> mix phoenix.new project_name /path/to/your/project
+    $ mix phoenix.new /path/to/your/project
 
-We will name our project `phoenix_jobs`. The directory of the project should be outside of this Phoenix cloned directory.
+We will name our project `phoenix_jobs` as a job board project. This step is very straighforward:
 
-    $> mix phoenix.new phoenix_jobs ../phoenix_jobs
+    $> mix phoenix.new phoenix_jobs
 
-    * creating ../phoenix_jobs
-    * creating ../phoenix_jobs/.gitignore
-    * creating ../phoenix_jobs/README.md
-    * creating ../phoenix_jobs/config
-    * creating ../phoenix_jobs/config/config.exs
-    * creating ../phoenix_jobs/config/dev.exs
-    * creating ../phoenix_jobs/config/locales
-    * creating ../phoenix_jobs/config/locales/en.exs
-    * creating ../phoenix_jobs/config/prod.exs
-    * creating ../phoenix_jobs/config/test.exs
+    * creating phoenix_jobs
+    * creating phoenix_jobs/.gitignore
+    * creating phoenix_jobs/README.md
+    * creating phoenix_jobs/config
+    * creating phoenix_jobs/config/config.exs
+    * creating phoenix_jobs/config/dev.exs
+    * creating phoenix_jobs/config/locales
+    * creating phoenix_jobs/config/locales/en.exs
+    * creating phoenix_jobs/config/prod.exs
+    * creating phoenix_jobs/config/test.exs
     ....
 
-As you can see, there is a lot going on. But as soon this finishes, we're good to go. What `phoenix.new` did was bootstrap our Phoenix project. Now go to destination directory, get all dependencies, compile it. and try to start the Phoenix project.
+Phoenix generates the directory structure and all the files we need for our project. After the process is done, it will ask us if we want to install it to install our `mix` dependencies for us. Answer wit Yes will be a wise choice.
 
-    $> cd ../phoenix_jobs/
-    $> mix do deps.get, compile
-    $> mix phoenix.server
+    Install mix dependencies? [Yn] y
+    * running mix deps.get
+
+Phoenix installer also prompt us to install [brunch.io](http://brunch.io/) as the static asset management. This step is optional by the way and will require [node.js](https://nodejs.org/) and npm installed on your system.
+
+    Install brunch.io dependencies? [Yn] y
+    * running npm install
+
+  > If you have not have nodejs in your system, just head over to [nodejs website](https://nodejs.org/) to install it.
+
+As you can see, there is a lot going on. But as soon this finishes, we're good to go. What `phoenix.new` did was bootstrap our Phoenix project. Now go to destination directory, and try to start the Phoenix project.
+
+    $> cd phoenix_jobs/
     [info] Running PhoenixJobs.Endpoint with Cowboy on port 4000 (http)
 
 Open the browser, type `http://localhost:4000/` in the url bar, and voila!
@@ -91,25 +85,32 @@ Phoenix is Model-View-Controller, so we find the Phoenix directories structured 
       ├── config
       │   ├── config.exs
       │   ├── dev.exs
-      │   ├── locales
-      │   │   └── en.exs
       │   ├── prod.exs
+      │   ├── prod.secret.exs
       │   └── test.exs
       ├── deps
       ├── lib
       │   ├── phoenix_jobs
-      │   │   └── endpoint.ex
+      │   │   ├── endpoint.ex
+      │   │   └── repo.ex
       │   └── phoenix_jobs.ex
       ├── mix.exs
       ├── mix.lock
+      ├── node_modules
+      ├── package.json
       ├── priv
+      │   ├── repo
+      │   │   └── migrations
       │   └── static
       │       ├── css
-      │       │   └── phoenix.css
+      │       │   ├── app.css
+      │       │   └── app.css.map
       │       ├── images
       │       │   └── phoenix.png
-      │       └── js
-      │           └── phoenix.js
+      │       ├── js
+      │       │   ├── app.js
+      │       │   └── app.js.map
+      │       └── robots.txt
       ├── README.md
       ├── test
       │   ├── phoenix_jobs_test.exs
@@ -120,21 +121,65 @@ Phoenix is Model-View-Controller, so we find the Phoenix directories structured 
           │   └── page_controller.ex
           ├── models
           ├── router.ex
+          ├── static
+          │   ├── css
+          │   │   └── app.scss
+          │   ├── js
+          │   │   └── app.js
+          │   └── vendor
+          │       └── phoenix.js
           ├── templates
           │   ├── layout
           │   │   └── application.html.eex
           │   └── page
-          │       ├── error.html.eex
-          │       ├── index.html.eex
-          │       └── not_found.html.eex
-          ├── view.ex
-          └── views
-              ├── error_view.ex
-              ├── layout_view.ex
-              └── page_view.ex
+          │       └── index.html.eex
+          ├── views
+          │   ├── error_view.ex
+          │   ├── layout_view.ex
+          │   └── page_view.ex
+          └── web.ex
 
-We need to focus on the `web` directory. Our controllers should be inside the `web/controllers` directory. Our views are in `web/views` and templates in `web/templates`. In Phoenix, views will render templates. A template is basically an `eex` file. And you can put models literally anywhere as long as still inside the application module.
-We will talk about model a.k.a Ecto in the next section.
+      2373 directories, 8250 files
+
+We need to focus on the `web` directory. Our controllers should be inside the `web/controllers` directory. Our views are in `web/views` and templates in `web/templates`. In Phoenix, views will render templates. A template is basically an `eex` file. And you can put database-related thing into `web/models` directory. Phoenix now ships with Ecto integration as the database layer by default.
+
+  > If you don't want to use Ecto in your project just add extra option `--no-ecto` along with `mix phoenix.new` command at first you create a project.
+
+
+## Add A New Page
+
+To add a new page, we need to add a route first. Head over to `web/router.ex` and
+add a new page we called it `hello`.
+
+    defmodule PhoenixJobs.Router do
+      use PhoenixJobs.Web, :router
+
+      pipeline :browser do
+        plug :accepts, ["html"]
+        plug :fetch_session
+        plug :fetch_flash
+        plug :protect_from_forgery
+      end
+
+      pipeline :api do
+        plug :accepts, ["json"]
+      end
+
+      scope "/", PhoenixJobs do
+        pipe_through :browser # Use the default browser stack
+
+        get "/", PageController, :index
+        get "/hello", HelloController, :index
+      end
+
+      # Other scopes may use custom stacks.
+      # scope "/api", PhoenixJobs do
+      #   pipe_through :api
+      # end
+    end
+
+Now let's create a new controller called `HelloController` file so we can start
+saying hello to the visitor.
 
 
 ## Introduction To Ecto

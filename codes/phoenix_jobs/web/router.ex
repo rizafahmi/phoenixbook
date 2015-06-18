@@ -1,21 +1,22 @@
 defmodule PhoenixJobs.Router do
-  use Phoenix.Router
+  use PhoenixJobs.Web, :router
 
   pipeline :browser do
-    plug :accepts, ~w(html)
+    plug :accepts, ["html"]
     plug :fetch_session
     plug :fetch_flash
     plug :protect_from_forgery
   end
 
   pipeline :api do
-    plug :accepts, ~w(json)
+    plug :accepts, ["json"]
   end
 
   scope "/", PhoenixJobs do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
+    get "/hello", HelloController, :index
   end
 
   # Other scopes may use custom stacks.

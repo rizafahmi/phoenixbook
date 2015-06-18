@@ -1,21 +1,23 @@
+# This file is responsible for configuring your application
+# and its dependencies with the aid of the Mix.Config module.
+#
+# This configuration file is loaded before any dependency and
+# is restricted to this project.
 use Mix.Config
 
 # Configures the endpoint
 config :phoenix_jobs, PhoenixJobs.Endpoint,
   url: [host: "localhost"],
-  secret_key_base: "7eQE5UiYyTxxNi+Ihjd/MWffvom7h48X6MXw8Dc5zYa22K5zsNB1j9aPfmgznWHw",
-  debug_errors: false
+  root: Path.dirname(__DIR__),
+  secret_key_base: "L8ckdlzHAVZaMjP7LAqTKYOusUmajYKGEhn4GEFLXpihl3LSiUiLYS8f1sWzAyAo",
+  debug_errors: false,
+  pubsub: [name: PhoenixJobs.PubSub,
+           adapter: Phoenix.PubSub.PG2]
 
 # Configures Elixir's Logger
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:request_id]
-
-config :phoenix_jobs, PhoenixJobs.Repo,
-  database: "phoenix_jobs",
-  username: "riza",
-  password: "220281",
-  hostname: "localhost"
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

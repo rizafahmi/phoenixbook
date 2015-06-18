@@ -1,3 +1,3 @@
 defmodule PhoenixJobs.PageView do
-  use PhoenixJobs.View
+  use PhoenixJobs.Web, :view
 end
