@@ -141,73 +141,26 @@ Phoenix is Model-View-Controller, so we find the Phoenix directories structured 
 
       2373 directories, 8250 files
 
-We need to focus on the `web` directory. Our controllers should be inside the `web/controllers` directory. Our views are in `web/views` and templates in `web/templates`. In Phoenix, views will render templates. A template is basically an `eex` file. And you can put database-related thing into `web/models` directory. Phoenix now ships with Ecto integration as the database layer by default.
+We need to focus on the `web` directory. Our controllers should be inside the `web/controllers` directory. Our views are in `web/views` and templates in `web/templates`. In Phoenix, views will render templates. A template is basically an `html` or `eex` file. All of our routes should be in `web/router.ex`. And you can put database-related thing into `web/models` directory. By the way, Phoenix now ships with Ecto integration as the database layer by default. Let see this in detail.
 
   > If you don't want to use Ecto in your project just add extra option `--no-ecto` along with `mix phoenix.new` command at first you create a project.
 
+### Routes
 
-## Add A New Page
+### Controllers
 
-To add a new page, we need to add a route first. Head over to `web/router.ex` and
-add a new page we called it `hello`.
+### Views and Templates
 
-    defmodule PhoenixJobs.Router do
-      use PhoenixJobs.Web, :router
+### Static Files
 
-      pipeline :browser do
-        plug :accepts, ["html"]
-        plug :fetch_session
-        plug :fetch_flash
-        plug :protect_from_forgery
-      end
+## Web Forms
 
-      pipeline :api do
-        plug :accepts, ["json"]
-      end
+## Databases
 
-      scope "/", PhoenixJobs do
-        pipe_through :browser # Use the default browser stack
+Phoenix by default ship with Ecto as their database layer. Ecto is a domain specific language for writing queries and interacting with databases in the Elixir language. Ecto is written in Elixir as a tool for relational databases.
 
-        get "/", PageController, :index
-        get "/hello", HelloController, :index
-      end
+If you use relational databases such as PostgreSQL or MariaDB, I highly suggest that you use Ecto. Otherwise, if you want to use NoSQL databases such as MongoDB, RethinkDB or anything else, you can use option `--no-ecto` to get rid of Ecto from your new phoenix project.
 
-      # Other scopes may use custom stacks.
-      # scope "/api", PhoenixJobs do
-      #   pipe_through :api
-      # end
-    end
-
-Now let's create a new controller called `HelloController` file so we can start
-saying hello to the visitor.
-
-
-## Introduction To Ecto
-
-*TODO*
-
-Ecto is a domain specific language for writing queries and interacting with databases in the Elixir language. Ecto is written in Elixir as a tool for relational databases.
-
-### Add Ecto To The Project
-
-We want to save jobs data to a database using Ecto. So we need to add Ecto to our project. To do that, we open the `mix.exs` file and add Ecto as a dependency inside the `deps` function. Ecto also needs the postgrex library to 'talk' to PostgreSQL database. So we also add postgrex as the dependency.
-
-    defp deps do
-          [
-              {:phoenix, github: "phoenixframework/phoenix"},
-              {:cowboy, "~> 1.0.0"},
-              {:postgrex, "0.7.0"},
-              {:ecto, "0.7.2"}
-          ]
-    end
-
-We also need to update our applications list to include both `ecto` and `postgrex`.
-
-    def application do
-      [applications: [:phoenix, :cowboy, :logger, :postgrex, :ecto]]
-    end
-
-Then run `mix deps.get` in the terminal to get all the dependencies. If everything goes well, it'll be time to setup a repo.
 
 ### Create A Repo
 
